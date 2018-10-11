@@ -30,6 +30,9 @@ public class AlumnoRepositoryImpl extends RepositoryGenericImpl<Alumno> implemen
         }
         
         Alumno alumnoOBtenido = (Alumno) criteria.uniqueResult();
+        if (alumnoOBtenido == null) {
+            alumnoOBtenido = new Alumno();
+        }
         
         return alumnoOBtenido;
                 
