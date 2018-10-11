@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='http://www.ehcache.org/v3'
+    xsi:schemaLocation="https://www.ehcache.org/v3 https://www.ehcache.org/schema/ehcache-core-3.6.xsd"
+>
+    <!-- <cache name="personaCache" eternal="false" maxElementsInMemory="10000" -->
+    <!-- overflowToDisk="false" memoryStoreEvictionPolicy="LFU" -->
+    <!-- copyOnRead="true" copyOnWrite="true" /> -->
+    <!-- <service> -->
+    <!-- <jsr107:defaults enable-management="false" -->
+    <!-- enable-statistics="true" /> -->
+    <!-- </service> -->
+    <!-- <cache alias="value"> -->
+    <!-- <resources> -->
+    <!-- <heap unit="entries">1000</heap> -->
+    <!-- </resources> -->
+    <!-- </cache> -->
+    <cache alias="alumnoCache">
+        <key-type>java.lang.String</key-type>
+        <value-type>com.cispal.siscolegio.domain.Alumno</value-type>
+<!--         <loader-writer> -->
+<!--             <class>com.pany.ehcache.integration.ProductCacheLoaderWriter</class> -->
+<!--         </loader-writer> -->
+        <heap unit="entries">100</heap>
+    </cache>
+</config>

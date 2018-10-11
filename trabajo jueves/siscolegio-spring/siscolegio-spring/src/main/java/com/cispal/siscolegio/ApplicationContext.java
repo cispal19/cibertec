@@ -5,27 +5,46 @@
  */
 package com.cispal.siscolegio;
 
-import com.cispal.siscolegio.domain.Alumno;
-import com.cispal.siscolegio.domain.Persona;
-import com.cispal.siscolegio.service.AlumnoService;
-import com.cispal.siscolegio.service.OtraPersonaService;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.net.URISyntaxException;
+import javax.cache.Caching;
+import javax.cache.spi.CachingProvider;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.jcache.JCacheCacheManager;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  *
  * @author JCISNEROSP
  */
 @ComponentScan(basePackages = "com.cispal.siscolegio")
+@Configuration
+@EnableCaching
 @EnableTransactionManagement
 public class ApplicationContext {
-    
-          public static void main(String[] args) {
+
+    @Bean
+    public CacheManager cacheManager() throws URISyntaxException {
+        CachingProvider cachingProvider = Caching.getCachingProvider();
+        javax.cache.CacheManager cacheManager = cachingProvider.getCacheManager(
+                getClass().getResource("/ehcache.xml").toURI(),
+                getClass().getClassLoader());
+        
+
+        JCacheCacheManager jcacheManager = new JCacheCacheManager();
+        jcacheManager.setCacheManager(cacheManager);
+        return jcacheManager;
+    }
+
+    public static void main(String[] args) {
         try (AnnotationConfigApplicationContext ctx
                 = new AnnotationConfigApplicationContext(
-                ApplicationContext.class)) {
+                        ApplicationContext.class)) {
 
 //            OtraPersonaService ops = ctx.getBean(OtraPersonaService.class);
 //            Persona px = new Persona();
@@ -33,23 +52,6 @@ public class ApplicationContext {
 //            px.setNombre("Luiggi");
 //            px.setEdad(60);
 //            ops.guardar(px);
-            
-              AlumnoService alumnoService = ctx.getBean(AlumnoService.class);
-            Alumno alumno = new Alumno();
-//            alumno.setIdalumno(1);
-            alumno.setNombres("julio cesar");
-            alumno.setApellidos("cisneros palomino");
-            alumno.setDireccion("callao");
-            alumno.setEmail("cispal19@gmail.com");
-            alumno.setSeccion("a");
-            alumno.setTelefono("123456789");
-            alumno.setSexo("M");
-            alumno.setGrado("primero");
-            
-           
-            alumnoService.guardar(alumno);
-        }
+                }
     }
-    }
-    
-
+}

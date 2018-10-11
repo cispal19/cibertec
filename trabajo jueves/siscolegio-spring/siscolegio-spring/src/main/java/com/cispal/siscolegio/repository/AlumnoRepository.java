@@ -13,4 +13,5 @@ import com.cispal.siscolegio.domain.Alumno;
  */
 public interface AlumnoRepository extends RepositoryGeneric<Alumno>{
     
+    Alumno getAlumnoByDni(String dni);
 }

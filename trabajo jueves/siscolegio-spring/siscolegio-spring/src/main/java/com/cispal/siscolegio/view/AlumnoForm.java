@@ -5,15 +5,23 @@
  */
 package com.cispal.siscolegio.view;
 
+import com.cispal.siscolegio.domain.Alumno;
+import com.cispal.siscolegio.service.AlumnoService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 /**
  *
  * @author JCISNEROSP
  */
 public class AlumnoForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AlumnoForm
-     */
+    private ApplicationContext ctx;
+
+    public void setCtx(ApplicationContext ctx) {
+        this.ctx = ctx;
+    }
+
     public AlumnoForm() {
         initComponents();
     }
@@ -27,6 +35,7 @@ public class AlumnoForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grupo = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         txtNombres = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -35,11 +44,9 @@ public class AlumnoForm extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         TxtDireccion = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        TxtTelefono = new javax.swing.JTextField();
+        txtDni = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         TxtEmail = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        TxtPassword = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         RBMasculino = new javax.swing.JRadioButton();
         RBFemenino = new javax.swing.JRadioButton();
@@ -80,10 +87,10 @@ public class AlumnoForm extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel9.setText("Telefono");
+        jLabel9.setText("DNI");
 
-        TxtTelefono.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
-        TxtTelefono.setForeground(new java.awt.Color(0, 102, 102));
+        txtDni.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        txtDni.setForeground(new java.awt.Color(0, 102, 102));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 102, 102));
@@ -92,19 +99,14 @@ public class AlumnoForm extends javax.swing.JFrame {
         TxtEmail.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         TxtEmail.setForeground(new java.awt.Color(0, 102, 102));
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel10.setText("Password");
-
-        TxtPassword.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
-        TxtPassword.setForeground(new java.awt.Color(0, 102, 102));
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 102, 102));
         jLabel5.setText("Sexo");
 
+        grupo.add(RBMasculino);
         RBMasculino.setText("Masculino");
 
+        grupo.add(RBFemenino);
         RBFemenino.setText("Femenino");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -120,6 +122,11 @@ public class AlumnoForm extends javax.swing.JFrame {
         CBXSeccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "C", "D", "F", "G", "H", "I" }));
 
         jButton1.setText("Guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Regresar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -147,13 +154,10 @@ public class AlumnoForm extends javax.swing.JFrame {
                                         .addComponent(jLabel11)
                                         .addGap(28, 28, 28))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel9)
-                                            .addComponent(jLabel10))
-                                        .addGap(16, 16, 16)))
+                                        .addComponent(jLabel9)
+                                        .addGap(21, 21, 21)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TxtPassword)
-                                    .addComponent(TxtTelefono)
+                                    .addComponent(txtDni)
                                     .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
@@ -220,19 +224,15 @@ public class AlumnoForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(TxtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(TxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)))
+                        .addGap(28, 28, 28))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGap(34, 34, 34)))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RBMasculino)
                     .addComponent(RBFemenino)
@@ -274,6 +274,30 @@ public class AlumnoForm extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        AlumnoService alumnoService = ctx.getBean(AlumnoService.class);
+        Alumno alumno = new Alumno();
+//            alumno.setIdalumno(1);
+        alumno.setNombres(txtNombres.getText());
+        alumno.setApellidos(TxtApellidos.getText());
+        alumno.setDireccion(TxtDireccion.getText());
+        alumno.setEmail(TxtEmail.getText());
+        alumno.setSeccion(CBXSeccion.getSelectedItem().toString());
+        alumno.setDni(txtDni.getText());
+        if (this.RBMasculino.isSelected()) {
+            alumno.setSexo("M"); 
+        }
+        if (this.RBFemenino.isSelected()) {
+           alumno.setSexo("F"); 
+        }
+        
+        alumno.setGrado(CBXGrado.getSelectedItem().toString());
+
+        alumnoService.guardar(alumno);
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -304,7 +328,9 @@ public class AlumnoForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AlumnoForm().setVisible(true);
+                AlumnoForm alumno = new AlumnoForm();
+                alumno.setCtx(new AnnotationConfigApplicationContext(com.cispal.siscolegio.ApplicationContext.class));
+                alumno.setVisible(true);
             }
         });
     }
@@ -317,12 +343,10 @@ public class AlumnoForm extends javax.swing.JFrame {
     private javax.swing.JTextField TxtApellidos;
     private javax.swing.JTextField TxtDireccion;
     private javax.swing.JTextField TxtEmail;
-    private javax.swing.JTextField TxtPassword;
-    private javax.swing.JTextField TxtTelefono;
+    private javax.swing.ButtonGroup grupo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -331,6 +355,7 @@ public class AlumnoForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtNombres;
     // End of variables declaration//GEN-END:variables
 }

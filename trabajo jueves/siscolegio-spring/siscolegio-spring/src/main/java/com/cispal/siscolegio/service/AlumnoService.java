@@ -12,5 +12,5 @@ import com.cispal.siscolegio.domain.Alumno;
  * @author JCISNEROSP
  */
 public interface AlumnoService extends ServiceGeneric<Alumno>{
-    
+     Alumno getAlumnoByDni(String dni);
 }

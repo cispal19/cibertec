@@ -33,11 +33,31 @@ public class Alumno implements Serializable{
     private String direccion;
     private String telefono;
     private String email;
-    private String password;
+    private String dni;
     private String grado;
     private String seccion;
     @OneToMany(mappedBy = "alumno")
     private List<Notas> listanotas;
+
+    public Alumno() {
+    }
+    
+    
+
+    public Alumno(int idalumno, String apellidos, String nombres, Date fechanacimiento, String sexo, String direccion, String telefono, String email, String dni, String grado, String seccion, List<Notas> listanotas) {
+        this.idalumno = idalumno;
+        this.apellidos = apellidos;
+        this.nombres = nombres;
+        this.fechanacimiento = fechanacimiento;
+        this.sexo = sexo;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.email = email;
+        this.dni = dni;
+        this.grado = grado;
+        this.seccion = seccion;
+        this.listanotas = listanotas;
+    }
 
 
 
@@ -106,12 +126,12 @@ public class Alumno implements Serializable{
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getDni() {
+        return dni;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getGrado() {
@@ -136,6 +156,11 @@ public class Alumno implements Serializable{
 
     public void setListanotas(List<Notas> listanotas) {
         this.listanotas = listanotas;
+    }
+
+    @Override
+    public String toString() {
+        return "Alumno{" + "idalumno=" + idalumno + ", apellidos=" + apellidos + ", nombres=" + nombres + ", fechanacimiento=" + fechanacimiento + ", sexo=" + sexo + ", direccion=" + direccion + ", telefono=" + telefono + ", email=" + email + ", dni=" + dni + ", grado=" + grado + ", seccion=" + seccion + ", listanotas=" + listanotas + '}';
     }
 
     
