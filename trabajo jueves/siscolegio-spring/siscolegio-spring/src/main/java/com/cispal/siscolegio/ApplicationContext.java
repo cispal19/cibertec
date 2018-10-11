@@ -41,12 +41,12 @@ public class ApplicationContext {
         return jcacheManager;
     }
 
-    public static void main(String[] args) {
-        try (AnnotationConfigApplicationContext ctx
-                = new AnnotationConfigApplicationContext(
-                        ApplicationContext.class)) {
-
-
-                }
-    }
+//    public static void main(String[] args) {
+//        try (AnnotationConfigApplicationContext ctx
+//                = new AnnotationConfigApplicationContext(
+//                        ApplicationContext.class)) {
+//
+//
+//                }
+//    }
 }

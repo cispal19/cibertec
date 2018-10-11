@@ -5,16 +5,15 @@
  */
 package com.cispal.siscolegio.service;
 
+import com.cispal.siscolegio.domain.Curso;
 import com.cispal.siscolegio.domain.Notas;
-import java.util.List;
 
 /**
  *
  * @author JCISNEROSP
  */
-public interface NotaService extends ServiceGeneric<Notas> {
-
-    List<Notas> consultarNotaByDniAlumno(Notas notas);
-    Notas consultarNotaByDniCursoBimestre(Notas notas);
-
+public interface CursoService extends ServiceGeneric<Curso>{
+   
+    
+    
 }

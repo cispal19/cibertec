@@ -1,12 +1,20 @@
 
 package com.cispal.siscolegio.view;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 
 public class Inicio extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Inicio
-     */
+    private ApplicationContext ctx;
+
+    public void setCtx(ApplicationContext ctx) {
+        this.ctx = ctx;
+    }
+    
+    
+    
     public Inicio() {
         initComponents();
     }
@@ -25,6 +33,8 @@ public class Inicio extends javax.swing.JFrame {
         menualumnos = new javax.swing.JMenu();
         menucursos = new javax.swing.JMenu();
         menuprofesores = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -72,6 +82,18 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
+        jMenu6.setText("Consultas");
+
+        jMenuItem1.setText("Consulta Alumno");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu6);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -111,6 +133,11 @@ public class Inicio extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenu5MouseClicked
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       ConsultaAlumnoDniCache a = new ConsultaAlumnoDniCache();
+       a.show();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -142,7 +169,9 @@ public class Inicio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Inicio().setVisible(true);
+               Inicio ini= new Inicio();
+               ini.setCtx(new AnnotationConfigApplicationContext(com.cispal.siscolegio.ApplicationContext.class));
+                ini.setVisible(true);
             }
         });
     }
@@ -152,7 +181,9 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menualumnos;
     private javax.swing.JMenu menucursos;
     private javax.swing.JMenu menuprofesores;

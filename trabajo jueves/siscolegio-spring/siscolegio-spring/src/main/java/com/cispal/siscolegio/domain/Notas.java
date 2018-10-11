@@ -32,9 +32,7 @@ public class Notas implements Serializable {
     public Notas() {
         
     }
-    
-    
-
+ 
     public Notas(int idnota, Curso curso, Alumno alumno, String unidad, int promedio) {
         this.idnota = idnota;
         this.curso = curso;

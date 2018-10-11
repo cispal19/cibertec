@@ -5,16 +5,12 @@
  */
 package com.cispal.siscolegio.repository;
 
-import com.cispal.siscolegio.domain.Notas;
-import java.util.List;
+import com.cispal.siscolegio.domain.Curso;
 
 /**
  *
  * @author JCISNEROSP
  */
-public interface NotaRepository extends RepositoryGeneric<Notas>{
-    
-    List<Notas> consultarNotaByDniAlumno(Notas notas);
-    Notas consultarNotaByDniCursoBimestre(Notas notas);
+public interface CursoRepository extends RepositoryGeneric<Curso>{
     
 }

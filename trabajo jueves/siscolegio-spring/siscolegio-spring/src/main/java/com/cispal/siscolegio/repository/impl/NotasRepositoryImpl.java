@@ -5,10 +5,10 @@
  */
 package com.cispal.siscolegio.repository.impl;
 
-
 import com.cispal.siscolegio.domain.Notas;
 import com.cispal.siscolegio.repository.NotaRepository;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -34,10 +34,33 @@ public class NotasRepositoryImpl extends RepositoryGenericImpl<Notas> implements
             criteria.add(Restrictions.eq("alumno.dni", notas.getAlumno().getDni()));
         }
 
-        List<Notas> lista =  criteria.list();
+        List<Notas> lista = criteria.list();
 
         return lista;
 
+    }
+
+    @Override
+    public Notas consultarNotaByDniCursoBimestre(Notas notas) {
+        Session session = (Session) entityManager.unwrap(Session.class);
+        Criteria criteria = session.createCriteria(Notas.class);
+        criteria.createCriteria("alumno", "alumno", JoinType.INNER_JOIN);
+        criteria.createCriteria("curso", "curso", JoinType.INNER_JOIN);
+
+        if (notas != null && notas.getAlumno() != null && notas.getAlumno().getDni() != null) {
+            criteria.add(Restrictions.eq("alumno.dni", notas.getAlumno().getDni()));
+        }
+        if (notas != null && notas.getCurso() != null && notas.getCurso().getIdcurso() != 0) {
+            criteria.add(Restrictions.eq("curso.idcurso", notas.getCurso().getIdcurso()));
+        }
+        
+        if (StringUtils.isNotBlank(notas.getUnidad())) {
+            criteria.add(Restrictions.eq("unidad", notas.getUnidad()));
+        }
+
+        Notas notaObtenida =(Notas) criteria.uniqueResult();
+
+        return notaObtenida;
     }
 
 }

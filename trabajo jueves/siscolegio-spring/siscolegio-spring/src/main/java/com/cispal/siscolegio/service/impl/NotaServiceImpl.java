@@ -10,6 +10,7 @@ import com.cispal.siscolegio.repository.NotaRepository;
 
 import com.cispal.siscolegio.service.NotaService;
 import java.util.List;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +32,13 @@ public class NotaServiceImpl extends ServiceGnericImpl<Notas> implements NotaSer
     @Override
     public List<Notas> consultarNotaByDniAlumno(Notas notas) {
         return notaRepository.consultarNotaByDniAlumno(notas);
+    }
+
+//    @Cacheable(cacheNames = "notasCache")
+    @Transactional
+    @Override
+    public Notas consultarNotaByDniCursoBimestre(Notas notas) {
+        return notaRepository.consultarNotaByDniCursoBimestre(notas);
     }
 
 }

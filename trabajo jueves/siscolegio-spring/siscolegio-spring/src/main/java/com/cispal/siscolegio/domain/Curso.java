@@ -62,8 +62,10 @@ public class Curso implements Serializable{
 
     @Override
     public String toString() {
-        return "Curso{" + "idcurso=" + idcurso + ", nombrecurso=" + nombrecurso + ", profesor=" + profesor + '}';
+        return nombrecurso ;
     }
+
+   
     
     
     
