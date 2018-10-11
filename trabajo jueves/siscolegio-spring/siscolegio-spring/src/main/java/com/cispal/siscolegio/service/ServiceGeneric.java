@@ -23,7 +23,7 @@ public interface ServiceGeneric<T> {
 
     public List<T> listarAll();
 
-    public List<T> listarAll(T t);
+   
 
     
 }

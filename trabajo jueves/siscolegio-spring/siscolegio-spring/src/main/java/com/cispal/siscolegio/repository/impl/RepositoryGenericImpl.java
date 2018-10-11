@@ -63,9 +63,6 @@ public abstract class RepositoryGenericImpl<T> implements RepositoryGeneric<T> {
 
     }
 
-    @Override
-    public List<T> listarAll(T t) {
-        return null;
-    }
+   
 
 }

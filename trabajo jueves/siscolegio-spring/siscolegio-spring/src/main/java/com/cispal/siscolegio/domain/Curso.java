@@ -25,6 +25,11 @@ public class Curso implements Serializable{
     @JoinColumn(name="idprofesor")
     private Profesor profesor;
 
+    public Curso() {
+    }
+    
+    
+
     public Curso(int idcurso, String nombrecurso, Profesor profesor) {
         this.idcurso = idcurso;
         this.nombrecurso = nombrecurso;
@@ -53,6 +58,11 @@ public class Curso implements Serializable{
 
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
+    }
+
+    @Override
+    public String toString() {
+        return "Curso{" + "idcurso=" + idcurso + ", nombrecurso=" + nombrecurso + ", profesor=" + profesor + '}';
     }
     
     

@@ -29,6 +29,12 @@ public class Notas implements Serializable {
     private String unidad;
     private int promedio;
 
+    public Notas() {
+        
+    }
+    
+    
+
     public Notas(int idnota, Curso curso, Alumno alumno, String unidad, int promedio) {
         this.idnota = idnota;
         this.curso = curso;
@@ -76,5 +82,12 @@ public class Notas implements Serializable {
     public void setPromedio(int promedio) {
         this.promedio = promedio;
     }
+
+    @Override
+    public String toString() {
+        return "Notas{" + "idnota=" + idnota + ", curso=" + curso + ", alumno=" + alumno + ", unidad=" + unidad + ", promedio=" + promedio + '}';
+    }
+    
+    
 
 }

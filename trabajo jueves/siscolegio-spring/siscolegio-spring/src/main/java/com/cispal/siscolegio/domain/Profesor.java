@@ -30,6 +30,10 @@ public class Profesor implements Serializable{
     @OneToMany(mappedBy = "profesor")
     private List<Curso> listanotas;
 
+    public Profesor() {
+    }
+    
+
     public Profesor(int idprofesor, String apellidos, String nombres, String dni, String direccion, String telefono, String email, String password, List<Curso> listanotas) {
         this.idprofesor = idprofesor;
         this.apellidos = apellidos;
@@ -114,6 +118,11 @@ public class Profesor implements Serializable{
 
     public void setListanotas(List<Curso> listanotas) {
         this.listanotas = listanotas;
+    }
+
+    @Override
+    public String toString() {
+        return "Profesor{" + "idprofesor=" + idprofesor + ", apellidos=" + apellidos + ", nombres=" + nombres + ", dni=" + dni + ", direccion=" + direccion + ", telefono=" + telefono + ", email=" + email + ", password=" + password + ", listanotas=" + listanotas + '}';
     }
     
     

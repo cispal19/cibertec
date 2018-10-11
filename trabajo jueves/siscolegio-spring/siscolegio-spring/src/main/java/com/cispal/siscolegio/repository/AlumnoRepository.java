@@ -6,6 +6,7 @@
 package com.cispal.siscolegio.repository;
 
 import com.cispal.siscolegio.domain.Alumno;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,6 @@ import com.cispal.siscolegio.domain.Alumno;
 public interface AlumnoRepository extends RepositoryGeneric<Alumno>{
     
     Alumno getAlumnoByDni(String dni);
+    List<Alumno> listarParametro(Alumno alumno);
+   
 }

@@ -53,9 +53,6 @@ public abstract class ServiceGnericImpl<T> implements ServiceGeneric<T>{
        return repositoryGeneric.listarAll();
     }
 
-    @Override
-    public List<T> listarAll(T t) {
-       return null;
-    }
+   
     
 }

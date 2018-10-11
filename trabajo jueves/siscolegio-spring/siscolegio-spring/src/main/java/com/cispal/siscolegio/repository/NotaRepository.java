@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cispal.siscolegio.service;
+package com.cispal.siscolegio.repository;
 
-import com.cispal.siscolegio.domain.Alumno;
+import com.cispal.siscolegio.domain.Notas;
 import java.util.List;
 
 /**
  *
  * @author JCISNEROSP
  */
-public interface AlumnoService extends ServiceGeneric<Alumno>{
-     Alumno getAlumnoByDni(String dni);
-     List<Alumno> listarParametro(Alumno alumno);
+public interface NotaRepository extends RepositoryGeneric<Notas>{
+    
+    List<Notas> consultarNotaByDniAlumno(Notas notas);
+    
 }

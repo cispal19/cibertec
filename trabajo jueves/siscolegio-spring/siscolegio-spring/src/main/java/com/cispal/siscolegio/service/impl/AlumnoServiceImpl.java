@@ -7,8 +7,9 @@ package com.cispal.siscolegio.service.impl;
 
 import com.cispal.siscolegio.domain.Alumno;
 import com.cispal.siscolegio.repository.AlumnoRepository;
-import com.cispal.siscolegio.repository.RepositoryGeneric;
+ 
 import com.cispal.siscolegio.service.AlumnoService;
+import java.util.List;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +32,12 @@ public class AlumnoServiceImpl extends ServiceGnericImpl<Alumno> implements Alum
     @Override
     public Alumno getAlumnoByDni(String dni) {
         return alumnoRepositori.getAlumnoByDni(dni);
+    }
+
+    @Transactional
+    @Override
+    public List<Alumno> listarParametro(Alumno alumno) {
+       return alumnoRepositori.listarParametro(alumno);
     }
     
     

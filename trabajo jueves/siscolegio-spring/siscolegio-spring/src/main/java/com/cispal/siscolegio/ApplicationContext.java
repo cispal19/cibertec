@@ -46,12 +46,7 @@ public class ApplicationContext {
                 = new AnnotationConfigApplicationContext(
                         ApplicationContext.class)) {
 
-//            OtraPersonaService ops = ctx.getBean(OtraPersonaService.class);
-//            Persona px = new Persona();
-//            px.setDni("777777");
-//            px.setNombre("Luiggi");
-//            px.setEdad(60);
-//            ops.guardar(px);
+
                 }
     }
 }
