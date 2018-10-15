@@ -34,11 +34,15 @@ public class AlumnoServiceImpl extends ServiceGnericImpl<Alumno> implements Alum
         return alumnoRepositori.getAlumnoByDni(dni);
     }
 
+    @Cacheable(cacheNames ="listaAlumnoCache")
     @Transactional
     @Override
     public List<Alumno> listarParametro(Alumno alumno) {
+        
        return alumnoRepositori.listarParametro(alumno);
     }
     
     
 }
+
+
