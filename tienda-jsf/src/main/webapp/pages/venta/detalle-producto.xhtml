@@ -1,33 +1,79 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <f:metadata>
-        <f:viewParam name="id" value="#{productoDetalleBean.idProducto}"
-            required="true" />
-    </f:metadata>
-    <h:head>
-        <title>Mi tienda de productos</title>
-        
-    </h:head>
-    <h:body>
-        
-            <div>
-                <h2>#{productoSku.producto.nombre}</h2>
+<ui:composition template="/plantillas/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-                <ui:remove>
-                    <p>#{productoSku.producto.descripcion}</p>
-                </ui:remove>
-                <h2>
-                    <h:outputText value="#{productoSku.precio}">
-                        <f:convertNumber type="number" pattern="#0.00" />
-                    </h:outputText>
-                </h2>
-                <br />
-                <span>Categoría: #{productoSku.producto.categoria.nombre}</span>
+
+
+    <ui:define name="titulo">Lista Productos</ui:define>
+
+    <ui:define name="cuerpo">
+
+        <div class="col-md-12">
+            <div class="card">
+                <h:form id="form">
+                    <div class="card-header card-header-icon" data-background-color="blue">
+                        <i class="material-icons">assignment</i>
+                    </div>
+                    <h4 class="card-title">#{msjs.titulo_tabla}</h4>
+                    <p class="category">#{msjs.subtitulo_tabla}</p>
+
+                    <div class="card-content table-responsive">
+                        <div style="float: top">
+                            <h:commandLink  value="Agregar" action="#{menuBean.producto()}" class="btn btn-info"/>
+                        </div>
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th>Producto</th>
+                                    <th>Descripción</th>
+                                    <th>Categoria</th>
+                                    <th>Precio</th>
+                                    <th class="text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <ui:repeat var="pro" value="#{listaProductoBean.listaProductoSku}">
+                                    <tr>
+                                        <td class="text-center">3</td>
+                                        <td>#{pro.producto.nombre}</td>
+                                        <td>#{pro.producto.descripcion}</td>
+                                        <td>#{pro.producto.categoria.nombre}</td>
+                                        <td class="text-right"> #{pro.precio}</td>
+                                        <td class="td-actions text-right">
+                                            <button type="button" rel="tooltip" class="btn btn-info btn-simple">
+                                                <i class="material-icons">person</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" class="btn btn-success btn-simple">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ui:repeat>
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </h:form>
+
             </div>
-       
-    </h:body>
-</html>
+
+        </div>
+
+
+
+    </ui:define>
+
+</ui:composition>
+

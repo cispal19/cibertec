@@ -21,4 +21,14 @@ public class ProductoDetalleBean {
     public void init() {
         
     }
+
+    public Integer getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(Integer idProducto) {
+        this.idProducto = idProducto;
+    }
+    
+    
 }

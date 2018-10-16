@@ -15,13 +15,13 @@
         <div class="col-md-12">
             <div class="card">
                 <h:form id="form">
-                   
+                 
                     <h4 class="card-title">#{msjs.titulo_tabla}</h4>
                     <p class="category">#{msjs.subtitulo_tabla}</p>
 
                     <div class="card-content table-responsive">
                         <div style="float: top">
-                            <h:commandLink  value="Agregar" action="#{menuBean.productoNuevo()}" class="btn btn-info"/>
+                            <h:commandLink  value="Agregar" action="#{menuBean.producto()}" class="btn btn-info"/>
                         </div>
 
                         <table class="table">
@@ -29,29 +29,31 @@
                                 <tr>
                                     <th class="text-center">#</th>
                                     <th>Producto</th>
-                                    <th>Descripción</th>
+                                    <!--<th>Descripción</th>-->
                                     <th>Categoria</th>
-
+                                    <th>Cantidad</th>
                                     <th class="text-right">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                <ui:repeat var="pro" value="#{productoListBean.listaProducto}">
+                                <ui:repeat var="pro" value="#{listaProductoBean.listaProductoSku}">
                                     <tr>
-                                        <td class="text-center">#{pro.id}</td>
-                                        <td>#{pro.nombre}</td>
-                                        <td>#{pro.descripcion}</td>
-                                        <td>#{pro.categoria.nombre}</td>
-
+                                        <td class="text-center">3</td>
+                                        <td>#{pro.producto.nombre}</td>
+                                        <!--<td>#{pro.producto.descripcion}</td>-->
+                                        <td>#{pro.producto.categoria.nombre}</td>
+                                        <td class="text-right"> #{pro.cantidad}</td>
                                         <td class="td-actions text-right">
-                                            
-                                            <h:commandLink action="#{productoListBean.editar()}" styleClass="btn btn-success btn-simple">
-                                            <i class="material-icons">edit</i>
-                                            <f:setPropertyActionListener value="#{pro}" target="#{productoListBean.producto}" />
-                                            </h:commandLink>
-                                       
-                                       
+                                            <button type="button" rel="tooltip" class="btn btn-info btn-simple">
+                                                <i class="material-icons">person</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" class="btn btn-success btn-simple">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                            <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
+                                                <i class="material-icons">close</i>
+                                            </button>
                                         </td>
                                     </tr>
                                 </ui:repeat>

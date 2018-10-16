@@ -23,6 +23,13 @@ public class Producto extends Entidad {
     @OneToMany(mappedBy = "producto", cascade = ALL)
     private List<ProductoSku> listaSkus;
 
+    public Producto() {
+        
+         categoria = new Categoria();
+    }
+    
+    
+
     public String getNombre() {
         return nombre;
     }

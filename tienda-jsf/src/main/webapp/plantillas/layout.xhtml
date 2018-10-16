@@ -93,17 +93,45 @@
                                 </h:commandLink>
 
                             </li>
-
                             <li>
-
-                                <h:commandLink  action="#{menuBean.producto()}" styleClass="par">
+                                <a data-toggle="collapse" href="#pagesExamples">
                                     <i class="material-icons">table</i>
-                                    <h:outputFormat value="Producto">
-                                        <f:param value="producto"/>
-                                    </h:outputFormat>   
-                                </h:commandLink>
+                                    <p>Producto
+                                        <b class="caret"></b>
+                                    </p>
+                                </a>
+                                <div class="collapse" id="pagesExamples">
+                                    <ul class="nav">
+                                        <li>
+                                            <h:commandLink   action="#{menuBean.producto()}" styleClass="par">
+                                                <!--                                                <i class="material-icons">table</i>-->
+                                                <h:outputFormat value="Lista Producto">
+                                                    <f:param value="Lista Producto"/>
+                                                </h:outputFormat>   
+                                            </h:commandLink>
+                                        </li>
+                                        <li>
+                                            <h:commandLink   action="#{menuBean.productoPrecio()}" styleClass="par">
+                                                <!--                                                <i class="material-icons">table</i>-->
+                                                <h:outputFormat value="Lista de Precios">
+                                                    <f:param value="Lista de Precios"/>
+                                                </h:outputFormat>   
+                                            </h:commandLink>
+                                        </li>
+                                        <li>
+                                            <h:commandLink   action="#{menuBean.productoStock()}" styleClass="par">
+                                                <!--                                                <i class="material-icons">table</i>-->
+                                                <h:outputFormat value="Stock Producto">
+                                                    <f:param value="Stock Producto"/>
+                                                </h:outputFormat>   
+                                            </h:commandLink>
+                                        </li>
+                                        </ul>
+                                </div>
 
                             </li>
+
+
                             <li>
 
                                 <h:commandLink  action="#{menuBean.venta()}" styleClass="impar">
@@ -141,7 +169,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="#"> Dashboard </a>
+                            <a class="navbar-brand" href="#"> #{menuBean.nombre} </a>
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-right">
