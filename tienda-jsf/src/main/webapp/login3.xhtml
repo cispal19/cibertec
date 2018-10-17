@@ -6,14 +6,17 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h:form>
-            Nombre: <h:inputText value="#{loginBean.nombreUsuario}" />
-            <br />
-            Contraseña: <h:inputText value="#{loginBean.contrasena}" />
+        <form method="POST" action="#{request.contextPath}/login3">
+            Correo Electronico
+            <input type="text" name="correoElectronico"/>
             <br/>
+            <input type="password" name="contrasena"/>
             <br/>
-            <h:commandButton value="Login" action="#{loginBean.login}" />
-        </h:form>
+            <input type="submit" value="Login"/>
+
+
+        </form>
+      
     </h:body>
 </html>
 
