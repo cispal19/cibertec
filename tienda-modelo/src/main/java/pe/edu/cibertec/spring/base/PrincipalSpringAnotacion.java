@@ -4,7 +4,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import pe.edu.cibertec.spring.base.dominio.Categoria;
+import pe.edu.cibertec.spring.base.dominio.Producto;
 import pe.edu.cibertec.spring.base.dominio.ProductoSku;
+import pe.edu.cibertec.spring.base.service.ProductoServicio;
 import pe.edu.cibertec.spring.base.service.ProductoSkuServicio;
 
 @ComponentScan(basePackages = "pe.edu.cibertec.spring.base")
@@ -18,13 +21,24 @@ public class PrincipalSpringAnotacion {
                 = new AnnotationConfigApplicationContext(
                 PrincipalSpringAnotacion.class)) {
 
-            ProductoSkuServicio pss = ctx.getBean(ProductoSkuServicio.class);
-            ProductoSku ps = pss.obtenerPorId(4);
-            System.out.printf("%d %d %s %d %s\n", ps.getId(),
-                    ps.getProducto().getId(),
-                    ps.getProducto().getNombre(),
-                    ps.getProducto().getCategoria().getId(),
-                    ps.getProducto().getCategoria().getNombre());
+//            ProductoSkuServicio pss = ctx.getBean(ProductoSkuServicio.class);
+//            ProductoSku ps = pss.obtenerPorId(4);
+//            System.out.printf("%d %d %s %d %s\n", ps.getId(),
+//                    ps.getProducto().getId(),
+//                    ps.getProducto().getNombre(),
+//                    ps.getProducto().getCategoria().getId(),
+//                    ps.getProducto().getCategoria().getNombre());
+            
+            ProductoServicio pss = ctx.getBean(ProductoServicio.class);
+            Producto producto= new Producto();
+            Categoria categoria = new Categoria();
+            categoria.setId(1);
+            producto.setNombre("sin anotacion");
+            producto.setDescripcion("sin anotacion");
+            producto.setCategoria(categoria);
+            pss.guardar(producto);
+            
+            
         }
     }
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!--<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
@@ -10,7 +10,7 @@
 
     <bean class="pe.edu.cibertec.spring.base.service.impl.PersonaServiceImpl"
           lazy-init="true">
-        <!-- REVISAR BIEN EL BEAN A INYECTAR!!! -->
+         REVISAR BIEN EL BEAN A INYECTAR!!! 
         <constructor-arg ref="personaJdbcRepository" />
     </bean>
 
@@ -19,12 +19,12 @@
         <constructor-arg ref="dataSource" />
     </bean>
 
-<!--    <context:property-placeholder location="classpath:config-mysql.properties" />
+    <context:property-placeholder location="classpath:config-mysql.properties" />
 
     <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
         <property name="jdbcUrl" value="${database.jdbc.url}" />
         <property name="username" value="${database.jdbc.usuario}" />
         <property name="password" value="${database.jdbc.contrasena}" />
         <property name="maximumPoolSize" value="${database.jdbc.tamanioMaximoConexiones}" />
-    </bean>-->
-</beans>
+    </bean>
+</beans>-->
