@@ -23,10 +23,10 @@ public class ProductoSkuRepositorioJpaImpl
     @Override
     public void actualizarCantidad(int id, int cantidad) {
 
-        String sql = "update producto_sku set cantidad =cantidad + #cantidad where producto_id=#id";
+        String sql = "update producto_sku set cantidad =cantidad + ? where producto_id=?";
         Query query = em.createNativeQuery(sql);
-        query.setParameter("id", id);
-        query.setParameter("cantidad", cantidad);
+        query.setParameter(1, cantidad);
+        query.setParameter(2, id);
         query.executeUpdate();
     }
 }
