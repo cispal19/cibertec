@@ -71,5 +71,10 @@ public class MenuBean implements Serializable {
     return "/pages/proveedor/proveedorForm?faces-redirect=true";
     
     }
+    
+     public String compra() {
+        nombre = "Venta";
+        return "/pages/compra/compraList?faces-redirect=true";
+    }
 
 }

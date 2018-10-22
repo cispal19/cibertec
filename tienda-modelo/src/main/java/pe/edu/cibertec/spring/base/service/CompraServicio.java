@@ -17,5 +17,5 @@ import pe.edu.cibertec.spring.base.dominio.Producto;
 public interface CompraServicio extends Servicio<Compra>{
     
     public Compra realizarCompra(List<DetalleCompra> items,Compra compra);
-    
+    List<Compra> listarCompra(Compra compra);
 }

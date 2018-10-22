@@ -33,9 +33,11 @@ public class Compra extends Entidad {
     @ManyToOne
     @JoinColumn(name = "idproveedor")
     private Proveedor proveedor;
-    
-        @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL)
     private List<DetalleCompra> listaDetalleCompra;
+    
+    private String tipo_doc;
 
     public String getDocumento() {
         return documento;
@@ -68,8 +70,14 @@ public class Compra extends Entidad {
     public void setListaDetalleCompra(List<DetalleCompra> listaDetalleCompra) {
         this.listaDetalleCompra = listaDetalleCompra;
     }
-    
-    
+
+    public String getTipo_doc() {
+        return tipo_doc;
+    }
+
+    public void setTipo_doc(String tipo_doc) {
+        this.tipo_doc = tipo_doc;
+    }
     
 
 }

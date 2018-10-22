@@ -1,0 +1,102 @@
+<ui:composition template="/plantillas/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+
+    <ui:define name="titulo">Compras</ui:define>
+
+    <ui:define name="cuerpo">
+
+        <div class="col-md-12">
+            <div class="card">
+                <h:form id="form">
+
+                    <h4 class="card-title">Filtro de Busqueda</h4>
+                    <p class="category">Compras</p>
+
+                    <div class="card-content table-responsive">
+                        <div>
+                            <h:panelGroup layout="div">
+
+                                <h:panelGrid columns="2" width="100%">
+                                    <h:panelGrid columns="2">
+                                        <h:outputLabel value="Documento" style="width: 50%"/>
+                                        <h:inputText value="#{compraListBean.compra.documento}" class="form-control" style="width: 100%"/>
+
+
+                                    </h:panelGrid>
+
+
+                                    <h:panelGrid columns="1">
+                                        <div style="float: top">
+                                            <h:commandLink  value="Buscar" action="#{compraListBean.buscar()}" class="btn btn-info" />
+                                        </div>
+
+                                        <div style="float: top">
+                                            <h:commandLink  value="Nuevo" action="#{compraListBean.nuevo()}" class="btn btn-info"/>
+                                        </div>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+
+
+                            </h:panelGroup>
+
+
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th>Tipo Documento</th>
+                                    <th>Número</th>
+                                    <th>Proveedor</th>
+                                    <th>Fecha Compra</th>
+
+                                    <th class="text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <ui:repeat var="com" value="#{compraListBean.listaCompra}">
+                                    <tr>
+                                        <td class="text-center">#{com.id}</td>
+                                        <td>#{com.tipo_doc}</td>
+                                        <td>#{com.documento}</td>
+                                        <td>#{com.proveedor.nombre}</td>
+                                        <td>#{com.fechacompra}</td>
+                                        <td></td>
+
+                                        <td class="td-actions text-right">
+
+                                            <h:commandLink action="#{compraListBean.editar()}" styleClass="btn btn-success btn-simple">
+                                                <i class="material-icons">edit</i>
+                                                <f:setPropertyActionListener value="#{com}" target="#{compraListBean.compraSeleccionado}" />
+                                            </h:commandLink>
+
+
+                                        </td>
+                                    </tr>
+                                </ui:repeat>
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </h:form>
+
+            </div>
+
+        </div>
+
+
+
+    </ui:define>
+
+</ui:composition>
+

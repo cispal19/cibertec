@@ -15,6 +15,7 @@ import pe.edu.cibertec.spring.base.dominio.Compra;
 import pe.edu.cibertec.spring.base.dominio.DetalleCompra;
 import pe.edu.cibertec.spring.base.dominio.Producto;
 import pe.edu.cibertec.spring.base.dominio.ProductoSku;
+import pe.edu.cibertec.spring.base.dominio.Proveedor;
 import pe.edu.cibertec.spring.base.repository.CompraRepositorio;
 
 import pe.edu.cibertec.spring.base.service.CompraServicio;
@@ -46,15 +47,23 @@ public class CompraServicioImpl extends ServicioBase<Compra> implements CompraSe
     public Compra realizarCompra(List<DetalleCompra> items, Compra compra) {
         Compra compraGuardada = new Compra();
         compraGuardada = compra;
+        compraGuardada.setDocumento("10700763647");
+        compraGuardada.setListaDetalleCompra(items);
 
         for (DetalleCompra detalle : items) {
             productoSkuServicio.actualizarCantidad(detalle.getProducto().getId(), detalle.getCantidad());
         }
 
-        compraRepositorio.guardar(compra);
+        compraRepositorio.guardar(compraGuardada);
 
         return compraGuardada;
 
+    }
+
+    @Transactional
+    @Override
+    public List<Compra> listarCompra(Compra compra) {
+        return compraRepositorio.listarCompra(compra);
     }
 
 }

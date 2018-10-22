@@ -12,5 +12,5 @@ import pe.edu.cibertec.spring.base.dominio.Proveedor;
  * @author julio
  */
 public interface ProveedorServicio extends Servicio<Proveedor>{
-    
+    Proveedor getProveedorByRuc(String ruc);
 }

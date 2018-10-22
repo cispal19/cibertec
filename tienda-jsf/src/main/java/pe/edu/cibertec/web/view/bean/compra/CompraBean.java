@@ -45,6 +45,8 @@ public class CompraBean extends GenericController implements Serializable {
     private Proveedor proveedor;
     private DetalleCompra detalleCompra;
     private List<DetalleCompra> listaDetalleCompra;
+    private String ruc;
+    private String razonSocial;
 
     @PostConstruct
     public void init() {
@@ -70,12 +72,30 @@ public class CompraBean extends GenericController implements Serializable {
 
     }
 
+    public String buscarProveedor() {
+        if (ruc != null) {
+            if (ruc.length() >= 11) {
+             Proveedor   proveedor = proveedorServicio.getProveedorByRuc(ruc);
+                if (proveedor != null) {
+                    razonSocial = proveedor.getNombre();
+                }else{
+                razonSocial="Ningún Resultado";
+                }
+            }
+            return razonSocial;
+        }
+        return razonSocial;
+
+    }
+
     private void inicializar() {
         producto = new Producto();
         compra = new Compra();
         listaProducto = new ArrayList<>();
         listaDetalleCompra = new ArrayList<>();
         detalleCompra = new DetalleCompra();
+        proveedor = new Proveedor();
+//        ruc = "";
     }
 
     public Producto getProducto() {
@@ -125,5 +145,23 @@ public class CompraBean extends GenericController implements Serializable {
     public void setListaDetalleCompra(List<DetalleCompra> listaDetalleCompra) {
         this.listaDetalleCompra = listaDetalleCompra;
     }
+
+    public String getRuc() {
+        return ruc;
+    }
+
+    public void setRuc(String ruc) {
+        this.ruc = ruc;
+    }
+
+    public String getRazonSocial() {
+        return razonSocial;
+    }
+
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
+    }
+    
+    
 
 }

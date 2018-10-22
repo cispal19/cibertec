@@ -134,12 +134,22 @@
                             <li>
                                 <li>
                                     <h:commandLink   action="#{menuBean.proveedor()}" styleClass="par">
-                                         <i class="material-icons">group_work</i>
+                                        <i class="material-icons">group_work</i>
                                         <h:outputFormat value="Proveedor">
                                             <f:param value="Proveedor"/>
                                         </h:outputFormat>   
                                     </h:commandLink>
                                 </li>
+                            </li>
+                            <li>
+
+                                <h:commandLink  action="#{menuBean.compra()}" styleClass="impar">
+                                    <i class="material-icons">shop</i>
+                                    <h:outputFormat value="Compra">
+                                        <f:param value="Compra"/>
+                                    </h:outputFormat>   
+                                </h:commandLink>
+
                             </li>
 
 

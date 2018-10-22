@@ -5,6 +5,7 @@
  */
 package pe.edu.cibertec.spring.base.repository;
 
+import java.util.List;
 import pe.edu.cibertec.spring.base.dominio.Compra;
 
 /**
@@ -12,5 +13,7 @@ import pe.edu.cibertec.spring.base.dominio.Compra;
  * @author julio
  */
 public interface CompraRepositorio extends Repositorio<Compra>{
+    
+    List<Compra> listarCompra(Compra compra);
     
 }

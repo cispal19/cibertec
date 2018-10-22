@@ -21,6 +21,9 @@ public class Proveedor extends Entidad{
     private String nombre;
     private String nrodocumento;
 
+  
+    
+
     public String getNombre() {
         return nombre;
     }
