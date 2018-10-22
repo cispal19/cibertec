@@ -6,4 +6,5 @@ public interface ProductoSkuServicio
     extends Servicio<ProductoSku> {
 
     ProductoSku obtenerPorIdProducto(Integer idProducto);
+    void actualizarCantidad(int id, int cantidad);
 }

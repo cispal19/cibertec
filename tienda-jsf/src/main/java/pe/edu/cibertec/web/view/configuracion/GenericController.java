@@ -19,6 +19,11 @@ public class GenericController extends GenericMessageFactoryBean {
     
       protected static final String PRODUCTO = "PRODUCTO";
       protected static final String PRODUCTO_SKU = "PRODUCTO_SKU";
+      protected static final String PROVEEDOR="PROVEEDOR";
+      protected static final String COMPRA="COMPRA";
+      protected static final String VENTA="VENTA";
+      protected static final String DETALLE_COMPRA="DETALLE_COMPRA";
+      protected static final String DETALLE_VENTA="DETALLE_VENTA";
       
     
 

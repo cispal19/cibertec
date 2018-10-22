@@ -8,7 +8,7 @@
 
 
 
-    <ui:define name="titulo">Lista Productos</ui:define>
+    <ui:define name="titulo">Lista Proveedores</ui:define>
 
     <ui:define name="cuerpo">
 
@@ -16,43 +16,37 @@
             <div class="card">
                 <h:form id="form">
                    
-                    <h4 class="card-title">#{msjs.titulo_tabla}</h4>
-                    <p class="category">#{msjs.subtitulo_tabla}</p>
+                    <h4 class="card-title">Lista Proveedores</h4>
+                    <p class="category">Proveedores</p>
 
                     <div class="card-content table-responsive">
                         <div style="float: top">
-                            <h:commandLink  value="Agregar" action="#{menuBean.productoNuevo()}" class="btn btn-info"/>
-                        </div>
-                        
-                        <div style="float: top">
-                            <h:commandLink  value="prueba" action="#{compraBean.guardarCompra()}" class="btn btn-info"/>
+                            <h:commandLink  value="Agregar" action="#{menuBean.proveedorNuevo()}" class="btn btn-info"/>
                         </div>
 
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th>Producto</th>
-                                    <th>Descripción</th>
-                                    <th>Categoria</th>
-
+                                    <th>Razón Social</th>
+                                    <th>RUC</th>
                                     <th class="text-right">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                <ui:repeat var="pro" value="#{productoListBean.listaProducto}">
+                                <ui:repeat var="pro" value="#{proveedorList.listaProveedor}">
                                     <tr>
                                         <td class="text-center">#{pro.id}</td>
                                         <td>#{pro.nombre}</td>
-                                        <td>#{pro.descripcion}</td>
-                                        <td>#{pro.categoria.nombre}</td>
+                                        <td>#{pro.nrodocumento}</td>
+                                        
 
                                         <td class="td-actions text-right">
                                             
-                                            <h:commandLink action="#{productoListBean.editar()}" styleClass="btn btn-success btn-simple">
+                                            <h:commandLink action="#{proveedorList.editar()}" styleClass="btn btn-success btn-simple">
                                             <i class="material-icons">edit</i>
-                                            <f:setPropertyActionListener value="#{pro}" target="#{productoListBean.producto}" />
+                                            <f:setPropertyActionListener value="#{pro}" target="#{proveedorList.proveedor}" />
                                             </h:commandLink>
                                        
                                        

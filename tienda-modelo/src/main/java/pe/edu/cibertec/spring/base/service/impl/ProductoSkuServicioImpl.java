@@ -20,4 +20,9 @@ public class ProductoSkuServicioImpl
     public ProductoSku obtenerPorIdProducto(Integer idProducto) {
         return ((ProductoSkuRepositorio)repositorio).obtenerPorIdProducto(idProducto);
     }
+
+    @Override
+    public void actualizarCantidad(int id, int cantidad) {
+       ((ProductoSkuRepositorio)repositorio).actualizarCantidad(id, cantidad);
+    }
 }
