@@ -62,5 +62,14 @@ public class MenuBean implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+    public String proveedor(){
+    return "/pages/proveedor/proveedores?faces-redirect=true";
+    }
+    
+    public String proveedorNuevo(){
+    return "/pages/proveedor/proveedorForm?faces-redirect=true";
+    
+    }
 
 }

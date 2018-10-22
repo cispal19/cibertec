@@ -6,5 +6,7 @@ public interface ProductoSkuRepositorio
     extends Repositorio<ProductoSku> {
 
     ProductoSku obtenerPorIdProducto(Integer idProducto);
+    
+   void actualizarCantidad(int id,int cantidad);
 
 }
