@@ -1,7 +1,7 @@
 <ui:composition template="/plantillas/layout.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
-
+                xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 >
@@ -35,7 +35,7 @@
                                         </div>
                                         <div class="col-sm-1">
 
-                                            <h:commandLink   action="#{compraBean.buscarProveedor()}" class="btn btn-info">
+                                            <h:commandLink   action="#{compraBean.buscarProveedor}" class="btn btn-info">
                                                 <i class="material-icons">search</i>
                                             </h:commandLink>
 
@@ -45,7 +45,7 @@
                                             <label class="col-sm-2 label-on-left">Proveedor:</label>
                                             <div class="form-group label-floating is-empty">
                                                 <label class="control-label"></label>
-                                                <h:outputText value="#{compraBean.razonSocial}" class="form-control"/>
+                                                <h:outputText value="#{compraBean.proveedor.nombre}" class="form-control"/>
                                             </div>
                                         </div>
 
@@ -68,10 +68,28 @@
                                             <div class="form-group label-floating is-empty">
                                                 <label class="control-label"></label>
                                                 <h:inputText value="#{compraBean.compra.documento}" 
-                                                             maxlength="11"  onkeyup="#{compraBean.buscarProveedor()}"
+                                                             maxlength="11"
                                                              class="form-control"/>
 
                                             </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <label class="col-sm-2 label-on-left">Fecha Compra</label>
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="control-label"></label>
+                                                <p:calendar id="button" value="#{compraBean.compra.fechacompra}"/>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12" >
+                                            <p:outputLabel value="Producto:" for="pro" />
+                                            <p:autoComplete id="pro" value="#{compraBean.producto}" completeMethod="#{compraBean.completeProducto}" 
+                                                            var="producto" itemLabel="#{producto.nombre}" itemValue="#{producto}" converter="#{productoConverter}" forceSelection="true">
+                                                <p:ajax event="itemSelect" listener="#{compraBean.add}" update="@this,pnlTabla" partialSubmit="true"/>
+                                            </p:autoComplete>
                                         </div>
                                     </div>
 
@@ -80,55 +98,79 @@
                                 </div>
                             </div>
                         </div>
+                        <h:panelGrid id="pnlTabla" style="width: 100%">
 
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-content">
-                                    <div class="row">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center">#</th>
-                                                    <th>Tipo Documento</th>
-                                                    <th>Número</th>
-                                                    <th>Proveedor</th>
-                                                    <th>Fecha Compra</th>
 
-                                                    <th class="text-right">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <ui:repeat var="com" value="#{compraListBean.listaCompra}">
+                            <div class="col-md-12" id="ddd">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="row">
+                                            <table class="table">
+                                                <thead>
                                                     <tr>
-                                                        <td class="text-center">#{com.id}</td>
-                                                        <td>#{com.tipo_doc}</td>
-                                                        <td>#{com.documento}</td>
-                                                        <td>#{com.proveedor.nombre}</td>
-                                                        <td>#{com.fechacompra}</td>
-                                                        <td></td>
+                                                        <th class="text-center">#</th>
+                                                        <th>Producto</th>
+                                                        <th>Cantidad</th>
+                                                        <th>Precio Unitario</th>
+                                                        <th>Total</th>
 
-                                                        <td class="td-actions text-right">
-
-                                                            <h:commandLink action="#{compraListBean.editar()}" styleClass="btn btn-success btn-simple">
-                                                                <i class="material-icons">edit</i>
-                                                                <f:setPropertyActionListener value="#{com}" target="#{compraListBean.compraSeleccionado}" />
-                                                            </h:commandLink>
-
-
-                                                        </td>
+                                                        <th class="text-right"></th>
                                                     </tr>
-                                                </ui:repeat>
+                                                </thead>
+                                                <tbody>
+
+                                                    <ui:repeat var="det" varStatus="detStatus" value="#{compraBean.listaDetalleCompra}">
+                                                        <tr>
+                                                            <td class="text-center">#{detStatus.index +1}</td>
+                                                            <td><h:outputLabel id="nomProducto" value="#{det.producto.nombre}"/></td>
+                                                            <td> <h:inputText value="#{det.cantidad}"/></td>
+                                                            <td><h:inputText value="#{det.precio}">
+                                                                </h:inputText></td>
+                                                            <td><h:outputText value="#{det.cantidad * det.precio}">
+
+                                                                </h:outputText>
+                                                            </td>
+                                                            <td></td>
+
+                                                            <td class="td-actions text-right">
+
+                                                                <h:commandLink action="#{compraBean.quitarDetalle}" styleClass="btn btn-success btn-simple">
+                                                                    <i class="material-icons">cancel</i>
+                                                                    <f:setPropertyActionListener value="#{det}" target="#{compraBean.detalleCompraSeleccionado}" />
+                                                                </h:commandLink>
 
 
-                                            </tbody>
-                                        </table>
+                                                            </td>
+                                                        </tr>
+                                                    </ui:repeat>
 
 
+                                                </tbody>
+                                            </table>
+
+                                        </div>
                                     </div>
-
                                 </div>
                             </div>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" style="width: 100%;border: 1px solid">
+                            <h:panelGrid columns="2" style="border: 1px solid;width: 100%">
+                                <h:outputLabel value="SubTotal:"/>
+                                <h:outputText value="1" style="border: 1px solid"></h:outputText>
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" style="border: 1px solid;width: 100%">
+                                <h:outputLabel value="SubTotal:"/>
+                                <h:outputText value="1454646" style="border: 1px solid"></h:outputText>
+                                <h:outputLabel value="I.G.V"/>
+                                <h:outputText value="4564646456" style="border: 1px solid"></h:outputText>
+                                <h:outputLabel value="Total:"/>
+                                <h:outputText value="45646" style="border: 1px solid"></h:outputText>
+                           </h:panelGrid>
+
+                        </h:panelGrid>
+
+                        <div style="float: top">
+                            <h:commandLink  value="Guardar" action="#{compraBean.guardarCompra}" class="btn btn-info"/>
                         </div>
                     </h:form>
 

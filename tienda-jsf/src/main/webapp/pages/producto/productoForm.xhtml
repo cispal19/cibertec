@@ -1,7 +1,7 @@
 <ui:composition template="/plantillas/layout.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
-
+                xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 >
@@ -43,10 +43,10 @@
                                             <div class="form-group label-floating is-empty">
                                                 <label class="control-label"></label>
                                                 <h:inputTextarea value="#{productoForm.producto.descripcion}" 
-                                                             required="true"
-                                                             label="descripcion"
-                                                             id="descripcion"
-                                                             class="form-control">
+                                                                 required="true"
+                                                                 label="descripcion"
+                                                                 id="descripcion"
+                                                                 class="form-control">
                                                     <f:validateLength maximum="200"/>
                                                 </h:inputTextarea>
 
@@ -60,11 +60,11 @@
                                             <div class="form-group label-floating is-empty">
                                                 <label class="control-label"></label>
                                                 <h:selectOneMenu value="#{productoForm.producto.categoria.id}" 
-                                                                    class="selectpicker"  
-                                                                    >
+                                                                 class="selectpicker"  
+                                                                 >
                                                     <f:selectItems var="cat" value="#{productoForm.listaCategoria}" itemLabel="#{cat.nombre}" itemValue="#{cat.id}" />
                                                 </h:selectOneMenu>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -74,10 +74,10 @@
                                 </div>
                             </div>
                         </div>
-                  
+
 
                     </h:form>
-                    
+
                 </div>                 
             </div>
         </div>

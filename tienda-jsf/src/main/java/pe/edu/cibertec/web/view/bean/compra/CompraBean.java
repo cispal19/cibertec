@@ -44,9 +44,11 @@ public class CompraBean extends GenericController implements Serializable {
     private List<Producto> listaProducto;
     private Proveedor proveedor;
     private DetalleCompra detalleCompra;
+    private DetalleCompra detalleCompraSeleccionado;
     private List<DetalleCompra> listaDetalleCompra;
     private String ruc;
     private String razonSocial;
+    private double total;
 
     @PostConstruct
     public void init() {
@@ -55,37 +57,57 @@ public class CompraBean extends GenericController implements Serializable {
     }
 
     public void guardarCompra() {
-        for (int i = 1; i < 5; i++) {
-            Producto pro = new Producto();
-            pro.setId(i);
-            pro.setNombre("nuevo");
-            Categoria catego = new Categoria();
-            catego.setId(1);
-            pro.setCategoria(catego);
-            detalleCompra.setProducto(pro);
-            detalleCompra.setPrecio(20);
-            detalleCompra.setCantidad(10);
-            listaDetalleCompra.add(detalleCompra);
-
-        }
+        compra.setProveedor(proveedor);
+                   
         compraServicio.realizarCompra(listaDetalleCompra, compra);
 
     }
 
-    public String buscarProveedor() {
+    public void buscarProveedor() {
         if (ruc != null) {
             if (ruc.length() >= 11) {
-             Proveedor   proveedor = proveedorServicio.getProveedorByRuc(ruc);
-                if (proveedor != null) {
-                    razonSocial = proveedor.getNombre();
-                }else{
-                razonSocial="Ningún Resultado";
+                Proveedor prov = proveedorServicio.getProveedorByRuc(ruc);
+                if (prov != null) {
+                    
+                    proveedor=prov;
+                } else {
+                    proveedor = new Proveedor();
+                    proveedor.setNombre("Ningún Resultado");
                 }
             }
-            return razonSocial;
+            
         }
-        return razonSocial;
+        
 
+    }
+
+    public void add() {
+        detalleCompra.setCantidad(0);
+        detalleCompra.setProducto(producto);
+        detalleCompra.setPrecio(0.0);
+        listaDetalleCompra.add(0, detalleCompra);
+        detalleCompra = new DetalleCompra();
+        producto = new Producto();
+        detalleCompraSeleccionado = new DetalleCompra();
+
+    }
+
+    public List<Producto> completeProducto(String query) {
+        List<Producto> listaProducto = productoServicio.obtenerTodos();
+        List<Producto> filteredProductos = new ArrayList<Producto>();
+
+        for (int i = 0; i < listaProducto.size(); i++) {
+            Producto skin = listaProducto.get(i);
+            if (skin.getNombre().toLowerCase().contains(query)) {
+                filteredProductos.add(skin);
+            }
+        }
+
+        return filteredProductos;
+    }
+
+    public void quitarDetalle() {
+        listaDetalleCompra.remove(detalleCompraSeleccionado);
     }
 
     private void inicializar() {
@@ -160,6 +182,22 @@ public class CompraBean extends GenericController implements Serializable {
 
     public void setRazonSocial(String razonSocial) {
         this.razonSocial = razonSocial;
+    }
+
+    public DetalleCompra getDetalleCompraSeleccionado() {
+        return detalleCompraSeleccionado;
+    }
+
+    public void setDetalleCompraSeleccionado(DetalleCompra detalleCompraSeleccionado) {
+        this.detalleCompraSeleccionado = detalleCompraSeleccionado;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
     
     

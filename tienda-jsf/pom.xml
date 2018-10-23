@@ -68,6 +68,13 @@
             <artifactId>spring-security-config</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>6.2</version>
+        </dependency>
+        
 
         
     </dependencies>

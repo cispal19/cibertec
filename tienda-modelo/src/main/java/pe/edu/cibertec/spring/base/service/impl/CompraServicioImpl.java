@@ -45,18 +45,16 @@ public class CompraServicioImpl extends ServicioBase<Compra> implements CompraSe
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Compra realizarCompra(List<DetalleCompra> items, Compra compra) {
-        Compra compraGuardada = new Compra();
-        compraGuardada = compra;
-        compraGuardada.setDocumento("10700763647");
-        compraGuardada.setListaDetalleCompra(items);
+        compra.setListaDetalleCompra(items);
 
         for (DetalleCompra detalle : items) {
+            detalle.setCompra(compra);
             productoSkuServicio.actualizarCantidad(detalle.getProducto().getId(), detalle.getCantidad());
         }
 
-        compraRepositorio.guardar(compraGuardada);
+        compraRepositorio.guardar(compra);
 
-        return compraGuardada;
+        return compra;
 
     }
 

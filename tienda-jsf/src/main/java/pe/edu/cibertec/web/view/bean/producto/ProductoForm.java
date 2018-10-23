@@ -63,7 +63,7 @@ public class ProductoForm extends GenericController implements Serializable {
     public void guardarProducto() {
         System.out.println(producto);
         if (producto.getId() == null) {
-            productoServicio.guardar(producto);
+            productoServicio.crearProducto(producto);
         } else {
             productoServicio.actualizar(producto);
         }
