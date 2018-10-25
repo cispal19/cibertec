@@ -6,6 +6,8 @@
 package pe.edu.cibertec.web.view.bean.compra;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -48,7 +50,11 @@ public class CompraBean extends GenericController implements Serializable {
     private List<DetalleCompra> listaDetalleCompra;
     private String ruc;
     private String razonSocial;
-    private double total;
+    private BigDecimal total;
+    private BigDecimal subTotal;
+    private BigDecimal igv;
+   
+    
 
     @PostConstruct
     public void init() {
@@ -91,7 +97,13 @@ public class CompraBean extends GenericController implements Serializable {
         detalleCompraSeleccionado = new DetalleCompra();
 
     }
-
+    public void calcularTotales(){
+        for (DetalleCompra detalle : listaDetalleCompra) {
+            subTotal=subTotal.add(new BigDecimal(detalle.getPrecio() * detalle.getCantidad()));    
+            total=total.add(subTotal);
+        }
+    }
+  
     public List<Producto> completeProducto(String query) {
         List<Producto> listaProducto = productoServicio.obtenerTodos();
         List<Producto> filteredProductos = new ArrayList<Producto>();
@@ -192,12 +204,28 @@ public class CompraBean extends GenericController implements Serializable {
         this.detalleCompraSeleccionado = detalleCompraSeleccionado;
     }
 
-    public double getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
+    }
+
+    public BigDecimal getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(BigDecimal subTotal) {
+        this.subTotal = subTotal;
+    }
+
+    public BigDecimal getIgv() {
+        return igv;
+    }
+
+    public void setIgv(BigDecimal igv) {
+        this.igv = igv;
     }
     
     

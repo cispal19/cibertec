@@ -123,24 +123,33 @@
                                                         <tr>
                                                             <td class="text-center">#{detStatus.index +1}</td>
                                                             <td><h:outputLabel id="nomProducto" value="#{det.producto.nombre}"/></td>
-                                                            <td> <h:inputText value="#{det.cantidad}"/></td>
-                                                            <td><h:inputText value="#{det.precio}">
-                                                                </h:inputText></td>
-                                                            <td><h:outputText value="#{det.cantidad * det.precio}">
-
-                                                                </h:outputText>
+                                                            <td> <p:inputText id="can" value="#{det.cantidad}">
+                                                                    <p:ajax update="can"/>
+                                                                </p:inputText></td>
+                                                            <td>
+                                                                <p:inputText id="surname" value="#{det.precio}">
+                                                                    <p:ajax event="blur" listener="#{compraBean.calcularTotales}" update="out2" />
+                                                                </p:inputText>
+<!--                                                                <h:inputText value="#{det.precio}">
+                                                                </h:inputText>-->
                                                             </td>
-                                                            <td></td>
+                                                                <td>
 
-                                                            <td class="td-actions text-right">
+                                                                    <h:outputText id="out2" value="#{det.cantidad * det.precio}">
 
-                                                                <h:commandLink action="#{compraBean.quitarDetalle}" styleClass="btn btn-success btn-simple">
-                                                                    <i class="material-icons">cancel</i>
-                                                                    <f:setPropertyActionListener value="#{det}" target="#{compraBean.detalleCompraSeleccionado}" />
-                                                                </h:commandLink>
+                                                                    </h:outputText>
+                                                                </td>
+                                                                <td></td>
+
+                                                                <td class="td-actions text-right">
+
+                                                                    <h:commandLink action="#{compraBean.quitarDetalle}" styleClass="btn btn-success btn-simple">
+                                                                        <i class="material-icons">cancel</i>
+                                                                        <f:setPropertyActionListener value="#{det}" target="#{compraBean.detalleCompraSeleccionado}" />
+                                                                    </h:commandLink>
 
 
-                                                            </td>
+                                                                </td>
                                                         </tr>
                                                     </ui:repeat>
 
@@ -155,22 +164,25 @@
                         </h:panelGrid>
                         <h:panelGrid columns="2" style="width: 100%;border: 1px solid">
                             <h:panelGrid columns="2" style="border: 1px solid;width: 100%">
-                                <h:outputLabel value="SubTotal:"/>
-                                <h:outputText value="1" style="border: 1px solid"></h:outputText>
+                                <h:outputText />
+
                             </h:panelGrid>
                             <h:panelGrid columns="2" style="border: 1px solid;width: 100%">
                                 <h:outputLabel value="SubTotal:"/>
-                                <h:outputText value="1454646" style="border: 1px solid"></h:outputText>
+                                <h:outputText value="#{compraBean.subTotal}" style="border: 1px solid"></h:outputText>
                                 <h:outputLabel value="I.G.V"/>
-                                <h:outputText value="4564646456" style="border: 1px solid"></h:outputText>
+                                <h:outputText value="#{compraBean.igv}" style="border: 1px solid"></h:outputText>
                                 <h:outputLabel value="Total:"/>
-                                <h:outputText value="45646" style="border: 1px solid"></h:outputText>
-                           </h:panelGrid>
+                                <h:outputText  value="#{compraBean.total}" style="border: 1px solid"></h:outputText>
+                            </h:panelGrid>
 
                         </h:panelGrid>
 
                         <div style="float: top">
                             <h:commandLink  value="Guardar" action="#{compraBean.guardarCompra}" class="btn btn-info"/>
+                        </div>
+                        <div style="float: top">
+                            <h:commandLink  value="Cancelar" action="#{menuBean.compra()}" class="btn btn-info"/>
                         </div>
                     </h:form>
 
