@@ -6,5 +6,6 @@ public interface UsuarioServicio
         extends Servicio<Usuario> {
     
     Usuario login(String usuario, String contrasena);
+    void saveUsuario(Usuario usuario);
     
 }

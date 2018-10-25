@@ -24,6 +24,7 @@ public class GenericController extends GenericMessageFactoryBean {
       protected static final String VENTA="VENTA";
       protected static final String DETALLE_COMPRA="DETALLE_COMPRA";
       protected static final String DETALLE_VENTA="DETALLE_VENTA";
+      protected static final String USUARIO="USUARIO";
       
     
 

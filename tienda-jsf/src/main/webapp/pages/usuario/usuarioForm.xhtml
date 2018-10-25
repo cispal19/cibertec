@@ -1,0 +1,89 @@
+<ui:composition template="/plantillas/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+
+
+
+    <ui:define name="titulo">Nuevo Usuario</ui:define>
+
+    <ui:define name="cuerpo">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <h:form id="frmProducto" class="form-horizontal">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header card-header-icon" data-background-color="blue">
+                                    <i class="material-icons">contacts</i>
+                                </div>
+                                <div class="card-content">
+                                    <h4 class="card-title">Nuevo Usuario</h4>
+
+                                    <div class="row">
+                                        <label class="col-sm-2 label-on-left">Usuario:</label>
+                                        <div class="col-sm-9">
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="control-label"></label>
+                                                <h:inputText value="#{usuarioForm.usuario.nombre}" 
+                                                             required="true"
+                                                             label="nombre"
+                                                             id="nombre" class="form-control">
+                                                    <f:validateLength maximum="20"/>
+                                                </h:inputText>
+                                                <span class="help-block"> <h:message for="nombre"/></span>  
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="col-sm-2 label-on-left">Correo:</label>
+                                        <div class="col-sm-9">
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="control-label"></label>
+                                                <h:inputText value="#{usuarioForm.usuario.correoElectronico}" 
+                                                             required="true"
+                                                             label="correo"
+
+                                                             class="form-control">
+
+                                                </h:inputText>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-sm-2 label-on-left">Contraseña:</label>
+                                        <div class="col-sm-9">
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="control-label"></label>
+                                                <h:inputSecret value="#{usuarioForm.usuario.contrasena}" 
+                                                             required="true"
+                                                             label="clave"
+                                                             id="clave"
+                                                             class="form-control">
+                                                </h:inputSecret>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h:commandButton value="Registrar" action="#{usuarioForm.guardarUsuario()}" rendered="#{!usuarioForm.mostrar}" class="btn btn-info" />  
+                                    <h:commandButton value="Cancelar"  action="#{menuBean.usuario()}"  class="btn btn-info" />  
+                                    <h:outputText value="#{usuarioForm.mensaje}" style="color:red"/>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </h:form>
+
+                </div>                 
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>
+

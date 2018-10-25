@@ -20,9 +20,9 @@ public class UsuarioRepositorioJpaImpl
         Session session = (Session) em.unwrap(Session.class);
         Criteria criteria = session.createCriteria(Usuario.class);
 
-        if (StringUtils.isNotBlank(usuario) && StringUtils.isNotBlank(contrasena)) {
+        if (StringUtils.isNotBlank(usuario)) {
             criteria.add(Restrictions.eq("nombre", usuario));
-            criteria.add(Restrictions.eq("contrasena",contrasena));
+//            criteria.add(Restrictions.eq("contrasena",contrasena));
         }
 
         Usuario usuarioObtenido = (Usuario) criteria.uniqueResult();

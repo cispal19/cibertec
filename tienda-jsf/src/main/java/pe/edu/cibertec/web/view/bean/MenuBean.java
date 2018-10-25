@@ -39,6 +39,11 @@ public class MenuBean implements Serializable {
         nombre = "Producto Nuevo";
         return "/pages/stock/productoStock?faces-redirect=true";
     }
+    
+     public String usuario() {
+       
+        return "/pages/usuario/usuarioList?faces-redirect=true";
+    }
 
     public String productoPrecio() {
         nombre = "Producto Nuevo";
@@ -69,6 +74,12 @@ public class MenuBean implements Serializable {
     
     public String proveedorNuevo(){
     return "/pages/proveedor/proveedorForm?faces-redirect=true";
+    
+    }
+    
+      
+    public String logout(){
+    return "/logout";
     
     }
     

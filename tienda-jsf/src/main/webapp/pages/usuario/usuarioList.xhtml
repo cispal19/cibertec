@@ -1,0 +1,60 @@
+<ui:composition template="/plantillas/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+
+    <ui:define name="titulo">Lista Usuarios</ui:define>
+
+    <ui:define name="cuerpo">
+
+        <div class="col-md-12">
+            <div class="card">
+                <h:form id="form">
+
+
+
+                    <div class="card-content table-responsive">
+                        <div style="float: top">
+                            <h:commandLink  value="Agregar" action="#{usuarioListBean.nuevo()}" class="btn btn-info"/>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th>Usuario</th>
+                                    <th>Correo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <ui:repeat var="usu" varStatus="usuStatus" value="#{usuarioListBean.listaUsuario}">
+                                    <tr>
+                                        <td class="text-center">#{usuStatus.index+1}</td>
+                                        <td>#{usu.nombre}</td>
+                                        <td>#{usu.correoElectronico}</td>
+
+                                    </tr>
+                                </ui:repeat>
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </h:form>
+
+            </div>
+
+        </div>
+
+
+
+    </ui:define>
+
+</ui:composition>
+
