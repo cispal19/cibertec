@@ -31,8 +31,13 @@ public class UsuarioDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Usuario usuario = usuarioServicio.login(username, null);
-        if (usuario == null) {
-
+        if (usuario.getNombre() == null) {
+            Usuario usuarioNuevo = new Usuario();
+           
+            usuarioNuevo.setNombre("julio");
+            usuarioNuevo.setCorreoElectronico("cispal19@gmail.com");
+            usuarioNuevo.setContrasena("123");
+            usuarioServicio.saveUsuario(usuario);
             throw new UsernameNotFoundException("Username not found");
         }
         return new User(usuario.getNombre(), usuario.getContrasena(),getGrantedAuthorities());

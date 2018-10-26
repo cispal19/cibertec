@@ -1,0 +1,36 @@
+<ui:composition template="/WEB-INF/template/layoutPadre.xhtml"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Generar Reporte de Pedidos Emitidos</ui:define>
+
+	<ui:define name="cuerpo">
+		<h:form>
+			<p:messages autoUpdate="true" closable="true"/>
+		
+			<h1>Generar Reporte de Pedidos Emitidos</h1>
+			<p:toolbar style="margin-top:20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Emitir" action="#{reportePedidosEmitidosBean.emitir}"
+	    				ajax="false" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			
+			<p:panelGrid columns="2" id="panelForm" style="width:100%;margin-top:15px" columnClasses="lblIzq">
+
+				<p:outputLabel value="Seleccione el rango de Fechas para el reporte" />
+				<h:panelGroup>
+					<p:calendar size="10" label="Fecha Inicio" pattern="dd/MM/yyyy"  value="#{reportePedidosEmitidosBean.fechaInicio}"/>
+					a
+					<p:calendar size="10" label="Fecha Fin" pattern="dd/MM/yyyy"  value="#{reportePedidosEmitidosBean.fechaFin}" />
+				</h:panelGroup>
+				
+			</p:panelGrid>
+
+		</h:form>	
+	</ui:define>
+	
+</ui:composition>

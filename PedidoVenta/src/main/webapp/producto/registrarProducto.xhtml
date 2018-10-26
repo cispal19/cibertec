@@ -1,0 +1,68 @@
+<ui:composition template="/WEB-INF/template/layoutPadre.xhtml"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:o="http://omnifaces.org/ui" >
+
+	<ui:define name="titulo">#{registroProductoBean.editando ? 'Editando Producto' : 'Registrar Nuevo Producto'}</ui:define>
+
+	<ui:define name="cuerpo">
+		<h1>#{registroProductoBean.editando ? 'Editando Producto' : 'Registrar Nuevo Producto'}</h1>
+		<f:metadata>
+			<o:viewParam name="producto" value="#{registroProductoBean.producto}" />
+			<f:event listener="#{registroProductoBean.inicializar}" type="preRenderView" />
+		</f:metadata>
+		
+		<h:form>
+		
+			<p:messages autoUpdate="true" />
+			<p:toolbar style="margin-top:20px">
+				<p:toolbarGroup>
+					<p:button value="Nuevo Producto" outcome="/producto/registrarProducto" />
+					<p:commandButton value="Grabar Producto" id="btnGrabar" 
+									action="#{registroProductoBean.registrarProducto}" update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Buscar Producto" id="btnBuscar" outcome="/producto/buscarProducto" />
+				</p:toolbarGroup>	
+			</p:toolbar>
+			
+			<p:panelGrid columns="2" id="panelForm" style="width:100%;margin-top:15px" columnClasses="lblIzq">
+				<p:outputLabel value="SKU" for="sku" />
+				<p:inputText id="sku" size="20" maxlength="20" value="#{registroProductoBean.producto.sku}"/>
+				
+				<p:outputLabel value="Nombre" for="nombre" />
+				<p:inputText id="nombre" size="60" maxlength="80" value="#{registroProductoBean.producto.nombreProducto}"/>
+				
+				<p:outputLabel value="Categoria" for="categoria" />
+				<p:selectOneMenu id="categoria" value="#{registroProductoBean.categoriaPadre}">
+					<f:selectItem itemLabel="Seleccione"></f:selectItem>
+					<f:selectItems value="#{registroProductoBean.categoriasIniciales}" var="categoria"
+									itemValue="#{categoria}" itemLabel="#{categoria.descripcion}"/>
+					<p:ajax listener="#{registroProductoBean.cargarSubcategorias}" update="subcategoria" />				
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="SubCategoria" for="subcategoria" />
+				<p:selectOneMenu id="subcategoria" value="#{registroProductoBean.producto.categoria}">
+					<f:selectItem itemLabel="Seleccione"></f:selectItem>
+					<f:selectItems value="#{registroProductoBean.subCategorias}" var="subCategorias"
+									itemValue="#{subCategorias}" itemLabel="#{subCategorias.descripcion}" />
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Valor Unitario" for="valor"  />
+				<p:inputText id="valor" size="10" maxlength="10" styleClass="moneda" 
+							value="#{registroProductoBean.producto.valorUnitario}">
+					<f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+				</p:inputText>
+				
+				<p:outputLabel value="Stock" for="stock" />
+				<p:inputText id="stock" size="10" maxlength="5"
+							value="#{registroProductoBean.producto.stock}"/>
+				
+			</p:panelGrid>
+		</h:form>	
+	</ui:define>
+	
+</ui:composition>

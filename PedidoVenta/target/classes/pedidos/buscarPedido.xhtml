@@ -1,0 +1,95 @@
+<ui:composition template="/WEB-INF/template/layoutPadre.xhtml"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Buscar Pedidos</ui:define>
+
+	<ui:define name="cuerpo">
+		<h:form>
+		
+		<p:messages autoUpdate="true" closable="true"/>
+		
+			<h1>Buscar Pedidos</h1>
+			<p:toolbar style="margin-top:20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Buscar Pedido" action="#{pedidoBean.buscarPedido}"
+									update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Nuevo Pedido" outcome="/pedidos/registrarPedido" />
+				</p:toolbarGroup>	
+			</p:toolbar>
+			
+			<p:panelGrid columns="2" id="panelForm" style="width:100%;margin-top:15px" columnClasses="lblIzq">
+				<p:outputLabel value="Numero" />
+				<h:panelGroup>
+					<p:inputText size="10" value="#{pedidoBean.filtros.numeroInicial}" />
+					a
+					<p:inputText size="10"  value="#{pedidoBean.filtros.numeroFinal}" />
+				</h:panelGroup>
+				<p:outputLabel value="Fecha de Pedido" />
+				<h:panelGroup>
+					<p:calendar size="10" pattern="dd/MM/yyyy"  value="#{pedidoBean.filtros.fechaInicial}"/>
+					a
+					<p:calendar size="10" pattern="dd/MM/yyyy" value="#{pedidoBean.filtros.fechaFinal}" />
+				</h:panelGroup>
+				
+				<p:outputLabel value="vendedor" for="vendedor" />
+				<p:inputText id="vendedor" size="40" value="#{pedidoBean.filtros.nombreVendedor}" />
+				
+				<p:outputLabel value="Cliente" for="cliente" />
+				<p:inputText id="cliente" size="40" value="#{pedidoBean.filtros.nombreCliente}" />
+				
+				<p:outputLabel value="Estado" />
+				<p:selectManyCheckbox value="#{pedidoBean.filtros.estadoPedidos}">
+					<f:selectItems value="#{pedidoBean.estadosPedido}" var="estado"
+								itemValue="#{estado}" itemLabel="#{estado.descripcion}"/>
+				</p:selectManyCheckbox>
+				
+			</p:panelGrid>
+			
+			<p:dataTable id="pedidosTable" value="#{pedidoBean.pedidosFiltrados}" var="pedido" 
+						style="margin-top:20px" emptyMessage="No se encontraron pedidos para su busqueda"
+						rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+				
+				<p:column headerText="Numero" style="text-align:center;width:100px" >
+					<h:outputLabel value="#{pedido.idPedido}" />
+				</p:column>
+				
+				<p:column headerText="Cliente" >
+					<h:outputLabel value="#{pedido.cliente.nombreCliente}" />
+				</p:column>
+				
+				<p:column headerText="Vendedor" style="width:250px;text-align:center" >
+					<h:outputLabel value="#{pedido.vendedor.nombreUsuario}" />
+				</p:column>
+				
+				<p:column headerText="Fecha de Pedido" style="text-align:center;width:120px" >
+					<h:outputLabel value="#{pedido.fechaPedido}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputLabel>
+				</p:column>
+				
+				<p:column headerText="Valor Total" style="text-align:right;width:100px" >
+					<h:outputLabel value="#{pedido.valorTotal}">
+						<f:convertNumber type="currency"/>
+					</h:outputLabel>
+				</p:column>
+				
+				<p:column headerText="Estado" style="text-align:center;width:100px" >
+					<h:outputLabel value="#{pedido.estadoPedido.descripcion}" />
+				</p:column>
+				
+				<p:column style="text-align:center;width:100px">
+					<p:button title="Editar" icon="ui-icon-pencil" outcome="/pedidos/registrarPedido">
+						<f:param name="pedido" value="#{pedido.idPedido}"/>
+					</p:button>
+				</p:column>
+			</p:dataTable>
+		</h:form>	
+	</ui:define>
+	
+</ui:composition>

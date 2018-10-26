@@ -10,8 +10,10 @@ import pe.edu.cibertec.spring.base.dominio.Producto;
 import pe.edu.cibertec.spring.base.service.ProductoServicio;
 
 import pe.edu.cibertec.spring.base.dominio.Proveedor;
+import pe.edu.cibertec.spring.base.dominio.Usuario;
 
 import pe.edu.cibertec.spring.base.service.ProveedorServicio;
+import pe.edu.cibertec.spring.base.service.UsuarioServicio;
 
 @ComponentScan(basePackages = "pe.edu.cibertec.spring.base")
 //Si no se agrega la anotación @EnableAspectJAutoProxy
@@ -43,12 +45,20 @@ public class PrincipalSpringAnotacion {
 //            pss.guardar(producto);
             
 
-            ProveedorServicio proveedorServicio=ctx.getBean(ProveedorServicio.class);
-            Proveedor  proveedor = new Proveedor();
-            proveedor.setNombre("CISPALSYSTEM SAC");
-            proveedor.setNrodocumento("20602115161");
-            
-            proveedorServicio.guardar(proveedor);
+//            ProveedorServicio proveedorServicio=ctx.getBean(ProveedorServicio.class);
+//            Proveedor  proveedor = new Proveedor();
+//            proveedor.setNombre("CISPALSYSTEM SAC");
+//            proveedor.setNrodocumento("20602115161");
+//            
+//            proveedorServicio.guardar(proveedor);
+
+
+            UsuarioServicio servicio =ctx.getBean(UsuarioServicio.class);
+            Usuario usuario = new Usuario();
+            usuario.setNombre("julio");
+            usuario.setCorreoElectronico("cispal19@gmail.com");
+            usuario.setContrasena("123");
+            servicio.saveUsuario(usuario);
 
             
         }

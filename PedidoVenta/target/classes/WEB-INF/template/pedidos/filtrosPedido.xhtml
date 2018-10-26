@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+
+		<p:panelGrid columns="4" style="margin-top:20px; width:100%;">
+		
+			<p:outputLabel value="Número"/>
+			<h:outputText value="#{registroPedidoBean.pedido.idPedido}" />
+		
+			<p:outputLabel value="Fecha de Creación"/>
+			<h:outputText value="#{registroPedidoBean.pedido.fechaPedido}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:outputText>
+			
+			<p:outputLabel value="Estado"/>
+			<h:outputText value="#{registroPedidoBean.pedido.estadoPedido}" />
+			
+			<p:outputLabel value="Vendedor" for="vendedor" />
+			<p:selectOneMenu id="vendedor" value="#{registroPedidoBean.pedido.vendedor}"
+							disabled="#{registroPedidoBean.pedido.noAlterable}">
+				<f:selectItem itemLabel="Seleccione"/>
+				<f:selectItems value="#{registroPedidoBean.vendedores}" var ="vendedor"
+								itemValue="#{vendedor}" itemLabel="#{vendedor.nombreUsuario}"/>
+			</p:selectOneMenu>
+			
+			<p:outputLabel value="Cliente" for="cliente" />
+			<p:autoComplete id="cliente" size="40" dropdown="true"
+				value="#{registroPedidoBean.pedido.cliente}"
+				completeMethod="#{registroPedidoBean.completarCliente}" var="cliente" 
+						itemLabel="#{cliente.nombreCliente}" itemValue="#{cliente}" forceSelection="true"
+						disabled="#{registroPedidoBean.pedido.noAlterable}" />
+ 
+			<p:outputLabel value="Forma de Pago" for="formaPago" />
+			<p:selectOneMenu id="formaPago" value="#{registroPedidoBean.pedido.formaPago}" 
+							disabled="#{registroPedidoBean.pedido.noAlterable}">
+				<f:selectItem itemLabel="Seleccione" />
+				<f:selectItems value="#{registroPedidoBean.formasdePago}" var="formaPago"
+							itemLabel="#{formaPago.descripcion}" itemValue="#{formaPago}" />
+			</p:selectOneMenu>
+			
+			<p:outputLabel value="Valor de Transporte" for="valorTransporte"/>
+			<p:inputText id="valorTransporte" size="10" maxlength="10" styleClass="moneda" 
+						value="#{registroPedidoBean.pedido.valorTransporte}"
+						disabled="#{registroPedidoBean.pedido.noAlterable}">
+				
+				<p:ajax event="change" process="@this" update="totalPedido" 
+						listener="#{registroPedidoBean.recalcularPedido}" />
+			</p:inputText>
+			
+			<p:outputLabel value="Subtotal" style="font-weight:bold" for="subtotal"/>
+			<h:outputText value="#{registroPedidoBean.pedido.valorSubtotal}" id="subtotal" style="font-weight:bold">
+				<f:convertNumber type="currency" />
+			</h:outputText>
+			
+			<p:outputLabel value="Valor de Descuento" for="valorDescuento"/>
+			<p:inputText id="valorDescuento" size="10" maxlength="10" styleClass="moneda" 
+						value="#{registroPedidoBean.pedido.valorDescuento}"
+						disabled="#{registroPedidoBean.pedido.noAlterable}" >
+				<p:ajax event="change" process="@this" update="totalPedido" 
+						listener="#{registroPedidoBean.recalcularPedido}" />
+			</p:inputText>
+			
+			<p:outputLabel value="Total Pedido" style="font-weight:bold" for="totalPedido"/>
+			<h:outputText value="#{registroPedidoBean.pedido.valorTotal}" id="totalPedido" 
+						style="font-weight:bold;font-size:1.1em">
+				<f:convertNumber type="currency" />
+			</h:outputText>
+			
+		</p:panelGrid>
+	
+</ui:composition>

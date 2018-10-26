@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+
+	
+	<p:panelGrid columns="4" style="width:100%;">
+		
+		<p:outputLabel value="Fecha de Pedido" for="fechaPedido"/>
+		<p:calendar id="fechaPedido" size="10" pattern="dd/MM/yyyy" 
+					value="#{registroPedidoBean.pedido.fechaEntrega}"
+					disabled="#{registroPedidoBean.pedido.noAlterable}" />
+		
+		<p:spacer />
+		<p:spacer />
+		
+		<p:outputLabel value="Ciudad" for="ciudad"/>
+		<p:inputText id="ciudad" size="30" value="#{registroPedidoBean.pedido.direccionEntrega.ciudad}" 
+				disabled="#{registroPedidoBean.pedido.noAlterable}"/>
+	
+		<p:outputLabel value="Distrito" for="distrito"/>
+		<p:inputText id="distrito" size="30" value="#{registroPedidoBean.pedido.direccionEntrega.distrito}" 
+				disabled="#{registroPedidoBean.pedido.noAlterable}"/>
+		
+		<p:outputLabel value="Dirección" for="direccion"/>
+		<p:inputText id="direccion" size="50" value="#{registroPedidoBean.pedido.direccionEntrega.direccionEntrega}" 
+				disabled="#{registroPedidoBean.pedido.noAlterable}"/>
+		
+		<p:outputLabel value="Referencia" for="referencia"/>
+		<p:inputText id="referencia" size="50" value="#{registroPedidoBean.pedido.direccionEntrega.referencia}" 
+				disabled="#{registroPedidoBean.pedido.noAlterable}"/>
+		
+		<p:outputLabel value="Número Contacto" for="numeroContacto"/>
+		<p:inputText id="numeroContacto" size="10" value="#{registroPedidoBean.pedido.direccionEntrega.numeroContacto}" 
+				disabled="#{registroPedidoBean.pedido.noAlterable}"/>
+		
+		<p:spacer />
+		<p:spacer />
+	
+	</p:panelGrid>
+	
+	
+</ui:composition>

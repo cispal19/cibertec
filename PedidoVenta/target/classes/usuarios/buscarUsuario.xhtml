@@ -1,0 +1,56 @@
+<ui:composition template="/WEB-INF/template/layoutPadre.xhtml"
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Buscar Usuario</ui:define>
+
+	<ui:define name="cuerpo">
+		<h:form>
+			<h1>Buscar Usuario</h1>
+			<p:toolbar style="margin-top:20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Buscar Usuario" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Nuevo Usuario" outcome="/usuarios/registrarUsuarios" />
+				</p:toolbarGroup>	
+			</p:toolbar>
+			
+			<p:panelGrid columns="2" id="panelForm" style="width:100%;margin-top:15px" columnClasses="lblIzq">
+
+				<p:outputLabel value="Nombre" for="nombre" />
+				<p:inputText id="nombre" size="60"  />
+				
+			</p:panelGrid>
+			
+			<p:dataTable id="usuariosTable" value="#{usuarioBean.usuariosFiltrados}" var="usuario" 
+						style="margin-top:20px" emptyMessage="No se encontraron Usuarios para su busqueda"
+						rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+				
+				<p:column headerText="Nombre" >
+					<h:outputLabel value="Juan Perez" />
+				</p:column>
+				
+				<p:column headerText="Correo" style="width:250px" >
+					<h:outputLabel value="juean.perez@joedayz.pe" />
+				</p:column>
+								
+				<p:column style="text-align:center;width:100px">
+					<p:button title="Editar" icon="ui-icon-pencil" />
+					<p:commandButton title="Eliminar" icon="ui-icon-trash" oncomplete="confirmarEliminar.show()" />
+				</p:column>
+			</p:dataTable>
+			
+			<p:confirmDialog header="Eliminar Usuario" message="Esta seguro de eliminar el usuario?"
+							widgetVar="confirmarEliminar">
+					<p:button value="No" onclick="confirmarEliminar.hide()"/>
+					<p:commandButton value="Si" oncomplete="confirmarEliminar.hide()" />
+			
+			</p:confirmDialog>
+		</h:form>	
+	</ui:define>
+	
+</ui:composition>

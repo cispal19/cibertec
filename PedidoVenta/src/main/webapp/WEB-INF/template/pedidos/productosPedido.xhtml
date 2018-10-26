@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+
+	
+	<p:dataTable value="#{registroPedidoBean.pedido.itens}" var="item" rowIndexVar="linea" id="tablaProductoPedido">
+		<p:column headerText="SKU" style="width:100px;text-align:center">
+			<h:outputText value="#{item.producto.sku}" rendered="#{item.productoAsociado}" />
+			<p:inputText size="8" value="#{registroPedidoBean.sku}" label="SKU"
+				rendered="#{not item.productoAsociado}">
+				<p:ajax event="change" process="@this" 
+					update="tablaProductoPedido :frmRegistroPedido:totalPedido :frmRegistroPedido:subtotal"
+					listener="#{registroPedidoBean.cargarProductosporSku}"/>
+			</p:inputText>
+		</p:column>
+		<p:column headerText="Producto">
+			<h:outputText value="#{item.producto.nombreProducto}" rendered="#{item.productoAsociado}" />
+			<p:autoComplete styleClass="producto-tabla" value="#{registroPedidoBean.productoEditable}"
+				completeMethod="#{registroPedidoBean.completarProducto}"
+				var="producto" itemLabel="#{producto.nombreProducto}" itemValue="#{producto}" 
+				forceSelection="true" rendered="#{not item.productoAsociado}">
+				<p:ajax event="itemSelect" update="tablaProductoPedido :frmRegistroPedido:totalPedido :frmRegistroPedido:subtotal"
+					listener="#{registroPedidoBean.cargarProductoEditables}"/>
+			</p:autoComplete>
+		</p:column>
+		<p:column headerText="Valor Unitario" style="width:120px;text-align:center">
+			<h:outputText value="#{item.valorUnitario}">
+				<f:convertNumber type="currency" />
+			</h:outputText>
+		</p:column>
+		<p:column headerText="Cantidad" style="width:100px;text-align:center">
+			<p:inputText size="8" value="#{item.cantidad}" disabled="#{registroPedidoBean.pedido.noAlterable}">
+				<p:ajax event="change" process="@this" 
+						update="tablaProductoPedido :frmRegistroPedido:totalPedido :frmRegistroPedido:subtotal"
+						listener="#{registroPedidoBean.actualizarCantidad(item, linea)}"/>
+			</p:inputText>
+		</p:column>
+		<p:column headerText="Stock" style="width:100px;text-align:center">
+			<h:outputText value="#{item.producto.stock}" 
+						style="#{item.stockInsuficiente? 'color:red' : '' }"/>
+			<h:graphicImage library="images" name="redalert.png" id="stockInsuficiente" 
+						style="width:15px;height:15px;vertical-align:bottom;margin-left:5px" 
+						rendered="#{item.stockInsuficiente}"/>
+						
+			<p:tooltip for="stockInsuficiente" value="Falta Stock" 
+						rendered="#{item.stockInsuficiente}"/>			
+		</p:column>
+		<p:column headerText="Valor Total" style="width:120px;text-align:right">
+			<h:outputText value="#{item.valorTotal}">
+				<f:convertNumber type="currency" />
+			</h:outputText>
+		</p:column>
+		
+		<p:columnGroup type="footer">
+			<p:row>
+				<p:column colspan="5" footerText="SubTotal" style="text-align:right" />
+				<p:column style="text-align:right"> 
+					<f:facet name="footer">
+						<h:outputText value="#{registroPedidoBean.pedido.valorSubtotal}">
+							<f:convertNumber type="currency"/>
+						</h:outputText>
+					</f:facet>
+				</p:column>
+			</p:row>
+		</p:columnGroup>
+		
+	</p:dataTable>
+	
+	
+</ui:composition>

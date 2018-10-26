@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 >
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
     <!-- Variable global de la aplicación web para indicar el archivo XML 
-        donde se encuentra nuestra configuración de Spring. -->
+    donde se encuentra nuestra configuración de Spring. -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
     <!-- Componente de Spring Web que crea un ServletContextListener. Esta 
-        clase va a crear el ApplicationContext ctx y lo registrará dentro de ServletContext 
-        para que el objeto ctx sea global a nivel de la aplicación. -->
+    clase va a crear el ApplicationContext ctx y lo registrará dentro de ServletContext 
+    para que el objeto ctx sea global a nivel de la aplicación. -->
     <listener>
         <listener-class>
             org.springframework.web.context.ContextLoaderListener
@@ -25,6 +25,7 @@
             org.springframework.web.context.request.RequestContextListener
         </listener-class>
     </listener>
+   
     <!-- Se configura el FacesServlet que va a atender las peticiones. -->
     <servlet>
         <servlet-name>FacesServlet</servlet-name>
@@ -37,4 +38,5 @@
     <welcome-file-list>
         <welcome-file>principal.xhtml</welcome-file>
     </welcome-file-list>
+   
 </web-app>
