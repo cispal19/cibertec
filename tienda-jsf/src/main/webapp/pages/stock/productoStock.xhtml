@@ -20,9 +20,7 @@
                     <p class="category">#{msjs.subtitulo_tabla}</p>
 
                     <div class="card-content table-responsive">
-                        <div style="float: top">
-                            <h:commandLink  value="Agregar" action="#{menuBean.producto()}" class="btn btn-info"/>
-                        </div>
+                      
 
                         <table class="table">
                             <thead>
@@ -32,7 +30,7 @@
                                     <!--<th>Descripción</th>-->
                                     <th>Categoria</th>
                                     <th>Cantidad</th>
-                                    <th class="text-right">Actions</th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,17 +42,7 @@
                                         <!--<td>#{pro.producto.descripcion}</td>-->
                                         <td>#{pro.producto.categoria.nombre}</td>
                                         <td class="text-right"> #{pro.cantidad}</td>
-                                        <td class="td-actions text-right">
-                                            <button type="button" rel="tooltip" class="btn btn-info btn-simple">
-                                                <i class="material-icons">person</i>
-                                            </button>
-                                            <button type="button" rel="tooltip" class="btn btn-success btn-simple">
-                                                <i class="material-icons">edit</i>
-                                            </button>
-                                            <button type="button" rel="tooltip" class="btn btn-danger btn-simple">
-                                                <i class="material-icons">close</i>
-                                            </button>
-                                        </td>
+                                      
                                     </tr>
                                 </ui:repeat>
 

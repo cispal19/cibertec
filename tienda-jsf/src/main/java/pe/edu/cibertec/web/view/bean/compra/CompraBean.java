@@ -53,8 +53,8 @@ public class CompraBean extends GenericController implements Serializable {
     private BigDecimal total;
     private BigDecimal subTotal;
     private BigDecimal igv;
-   
-    
+    private String mensaje;
+    private boolean mostrar;
 
     @PostConstruct
     public void init() {
@@ -64,8 +64,9 @@ public class CompraBean extends GenericController implements Serializable {
 
     public void guardarCompra() {
         compra.setProveedor(proveedor);
-                   
         compraServicio.realizarCompra(listaDetalleCompra, compra);
+        mensaje = "Se guardo con éxito";
+        mostrar = Boolean.TRUE;
 
     }
 
@@ -74,16 +75,15 @@ public class CompraBean extends GenericController implements Serializable {
             if (ruc.length() >= 11) {
                 Proveedor prov = proveedorServicio.getProveedorByRuc(ruc);
                 if (prov != null) {
-                    
-                    proveedor=prov;
+
+                    proveedor = prov;
                 } else {
                     proveedor = new Proveedor();
                     proveedor.setNombre("Ningún Resultado");
                 }
             }
-            
+
         }
-        
 
     }
 
@@ -97,13 +97,14 @@ public class CompraBean extends GenericController implements Serializable {
         detalleCompraSeleccionado = new DetalleCompra();
 
     }
-    public void calcularTotales(){
+
+    public void calcularTotales() {
         for (DetalleCompra detalle : listaDetalleCompra) {
-            subTotal=subTotal.add(new BigDecimal(detalle.getPrecio() * detalle.getCantidad()));    
-            total=total.add(subTotal);
+            subTotal = subTotal.add(new BigDecimal(detalle.getPrecio() * detalle.getCantidad()));
+            total = total.add(subTotal);
         }
     }
-  
+
     public List<Producto> completeProducto(String query) {
         List<Producto> listaProducto = productoServicio.obtenerTodos();
         List<Producto> filteredProductos = new ArrayList<Producto>();
@@ -129,6 +130,8 @@ public class CompraBean extends GenericController implements Serializable {
         listaDetalleCompra = new ArrayList<>();
         detalleCompra = new DetalleCompra();
         proveedor = new Proveedor();
+        mensaje = "";
+        mostrar = Boolean.FALSE;
 //        ruc = "";
     }
 
@@ -227,7 +230,21 @@ public class CompraBean extends GenericController implements Serializable {
     public void setIgv(BigDecimal igv) {
         this.igv = igv;
     }
-    
-    
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public boolean isMostrar() {
+        return mostrar;
+    }
+
+    public void setMostrar(boolean mostrar) {
+        this.mostrar = mostrar;
+    }
 
 }
